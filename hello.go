@@ -3,17 +3,19 @@ package main
 import (
 	"fmt"
 	"os"
+	"net/http"
 )
 
 func main() {
 
 	exibeIntroducao()
 	exibeMenu()
+
 	comando := leComando()
 
 	switch comando {
 	case 1:
-		fmt.Println("Monitorando...")
+		iniciaMonitoramento()
 	case 2:
 		fmt.Println("Exibindo Logs...")
 	case 0:
@@ -26,10 +28,11 @@ func main() {
 
 }
 
+
 func exibeIntroducao() {
-	name := "Hebert"
+	nome := "Hebert"
 	version := 1.1
-	fmt.Println("Olá, Sr.", name)
+	fmt.Println("Olá, Sr.", nome)
 	fmt.Println("Este programa está na versão", version)
 }
 
@@ -45,4 +48,17 @@ func leComando() int {
 	fmt.Println("O comando escolhido foi", comandoLido)
 
 	return comandoLido
+}
+
+func iniciaMonitoramento(){
+	fmt.Println("Monitorando...")
+	site := "https://random-status-code.herokuapp.com"
+	resp, _ := http.Get(site)
+
+	if resp.StatusCode == 200 {
+		fmt.Println("Site:", site, "foi carregado com sucesso!")
+	} else {
+		fmt.Println("Site:", site, "esta com problema. Status Code:",
+		resp.StatusCode)
+	}
 }
