@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -28,7 +28,6 @@ func main() {
 
 }
 
-
 func exibeIntroducao() {
 	nome := "Hebert"
 	version := 1.1
@@ -50,8 +49,17 @@ func leComando() int {
 	return comandoLido
 }
 
-func iniciaMonitoramento(){
+func iniciaMonitoramento() {
 	fmt.Println("Monitorando...")
+	sites := []string{
+
+		"https://random-status-code.herokuapp.com",
+		"https://pontonet.srv.br/hsma/index.php?m=1",
+		"https://rboconcursos.selecao.net.br/",
+	}
+
+	fmt.Println(sites)
+
 	site := "https://random-status-code.herokuapp.com"
 	resp, _ := http.Get(site)
 
@@ -59,6 +67,6 @@ func iniciaMonitoramento(){
 		fmt.Println("Site:", site, "foi carregado com sucesso!")
 	} else {
 		fmt.Println("Site:", site, "esta com problema. Status Code:",
-		resp.StatusCode)
+			resp.StatusCode)
 	}
 }
