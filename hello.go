@@ -3,8 +3,10 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -13,7 +15,8 @@ const delay = 5
 
 func main() {
 	exibeIntroducao()
-	leSitesDoArquivo()
+	registraLog("site-falso", false)
+
 	for {
 		exibeMenu()
 
@@ -83,32 +86,47 @@ func testaSite(site string) {
 
 	if resp.StatusCode == 200 {
 		fmt.Println("Site:", site, "foi carregado com sucesso!")
+		registraLog(site, true)
 	} else {
 		fmt.Println("Site:", site, "esta com problema. Status Code:",
 			resp.StatusCode)
+		registraLog(site, false)
 	}
 
 }
 
 func leSitesDoArquivo() []string {
+
 	var sites []string
 
 	arquivo, err := os.Open("sites.txt")
-	//arquivo, err := os.ReadFile("sites.txt")
-
 	if err != nil {
-		fmt.Println("Ocorreu m erro:", err)
+		fmt.Println("Ocorreu um erro:", err)
 	}
 
 	leitor := bufio.NewReader(arquivo)
 
-	linha, err := leitor.ReadString('\n')
-
-	if err != nil {
-		fmt.Println("Ocorreu m erro:", err)
+	for {
+		linha, err := leitor.ReadString('\n')
+		linha = strings.TrimSpace(linha)
+		sites = append(sites, linha)
+		if err == io.EOF {
+			break
+		}
 	}
 
-	fmt.Println(linha)
+	arquivo.Close()
 
 	return sites
+}
+
+func registraLog(site string, status bool) {
+
+	arquivo, err := os.OpenFile("log.txt", os.O_RDWR|os.O_CREATE, 0666)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(arquivo)
 }
