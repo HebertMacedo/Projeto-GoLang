@@ -1,0 +1,10 @@
+site-falso - online: false - 25/02/2025 15:24:47
+https://random-status-code.herokuapp.com - online: false - 25/02/2025 15:24:49
+https://www.alura.com.br - online: true - 25/02/2025 15:24:49
+https://www.caelum.com.br - online: true - 25/02/2025 15:24:50
+https://random-status-code.herokuapp.com - online: false - 25/02/2025 15:24:55
+https://www.alura.com.br - online: true - 25/02/2025 15:24:55
+https://www.caelum.com.br - online: true - 25/02/2025 15:24:55
+https://random-status-code.herokuapp.com - online: false - 25/02/2025 15:25:01
+https://www.alura.com.br - online: true - 25/02/2025 15:25:01
+https://www.caelum.com.br - online: true - 25/02/2025 15:25:01
